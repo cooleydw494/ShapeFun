@@ -1,0 +1,7 @@
+body {
+    margin: 0;
+}
+#canvasFun {
+    border: 1px solid black;
+    background-color: #b7a795;
+}
