@@ -23,11 +23,16 @@ var circleArray = [];
 window.addEventListener("click", makeNewCircle, false);
 
 //set radiusMin, radiusRange, collisionRadius, and velocity/expansion multipliers
-var radiusMin = 4;
-var radiusRange = 4;
-var collisionRadius = 50;
-var velMultiplier = 6;
-var expandMultiplier = 5;
+var radiusMin = 2;
+var radiusRange = 2;
+var collisionRadius = 60;
+var velMultiplier = 2;
+var expandMultiplier = 8;
+
+//instantiate color palettes
+var darkBluesPalette = ["#779589", "#151d4e", "#125b54", "#0a2427", "#161327", "white"];
+var salmonPalette = ["#7b1f1f", "#995252", "#135d3b", "#c05b5b", "#444040", "white"];
+var usaPalette = ["#cc092f", "#919693", "#ded5b3", "#1a4663", "#003050", "white"];
 
 //animate loop
 function animate() {
@@ -41,8 +46,8 @@ function animate() {
 //start animation
 animate();
 //start with 100 circles
-for (i = 0; i < 999; i++) {
-    makeNewCircle();
+for (i = 0; i < 699; i++) {
+    makeNewCircle(salmonPalette);
 }
 
 
@@ -80,6 +85,7 @@ function Circle(x, y, dx, dy, r, color, fillColor) {
         x += dx;
         y += dy;
         //update radius to shrink/grow based on mouse pos.
+        //if mouse is within collision radius
         if (x - mouse.x < collisionRadius && x - mouse.x > -collisionRadius
             && y - mouse.y < collisionRadius && y - mouse.y > -collisionRadius) {
             if (r < expandMultiplier * this.baseRadius) {
@@ -94,40 +100,21 @@ function Circle(x, y, dx, dy, r, color, fillColor) {
     };
 }
 
-//make a new circle using circle "class"        constructor and rand vals
-function makeNewCircle() {
-    //from radiusMin up to radiusMin + radiusRange
+//make a new circle using circle "class" constructor and rand vals
+function makeNewCircle(colorPalette) {
+    //from radiusMin up to (radiusMin + radiusRange)
     var r = Math.random() * radiusRange + radiusMin;
     var x = Math.random() * (canvas.width - (2 * r)) + r;
     var dx = (Math.random() - 0.5) * velMultiplier;
     var y = Math.random() * (canvas.height - (2 * r)) + r;
     var dy = (Math.random() - 0.5) * velMultiplier;
-    var color = randColor(), fillColor = randColor();
+    var color = randColor(colorPalette), fillColor = randColor(colorPalette);
     circleArray.push(new Circle(x, y, dx, dy, r, color, fillColor));
 }
 
 //generate and return random color
-function randColor() {
-    switch (Math.floor(Math.random() * 10)) {
-    case 1:
-        return "red";
-    case 2:
-        return "blue";
-    case 3:
-        return "green";
-    case 4:
-        return "purple";
-    case 5:
-        return "orange";
-    case 6:
-        return "pink";
-    case 7:
-        return "yellow";
-    case 8:
-        return "brown";
-    case 9:
-        return "black";
-    default:
-        return "black";
-    }
+function randColor(colorPalette) {
+    //random index from 0 to last array index
+    var index = (Math.floor(Math.random() * colorPalette.length));
+    return colorPalette[index];
 }
