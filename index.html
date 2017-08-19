@@ -7,7 +7,39 @@
     <title>Canvas Fun ;)</title>
 </head>
 <body>
+    <!-- CANVAS -->
     <canvas id="canvasFun"></canvas>
+    
+    <!-- GUI -->
+    <form id="guiForm">
+       
+        <!--SHAPE TYPE-->
+        <label for="shapeType">Shape: </label>
+        <select id="shapeType">
+            <option value="circle">Circles</option>
+            <option value="square" selected="selected">Squares</option>
+        </select>
+        
+        <!--NUMBER OF SHAPES-->
+        <label for="shapeNumber"># of Shapes: </label>
+        <input type="text" id="shapeNumber" value="500" required="required" />
+        
+        <!--COLOR PALETTE-->
+        <label for="colorPalette">Color Palette: </label>
+        <select id="colorPalette">
+            <option value="Salmon">Salmon</option>
+            <option value="Dark Blues" selected="selected">Dark Blues</option>
+            <option value="USA Cola">USA Cola</option>
+            <option value="Old School">Old School</option>
+        </select>
+        
+        <!--SUBMIT-->
+        <button type="button" id="submitButton">MAKE DEM SHAPES!</button>
+        
+        <!--CLEAR-->
+        <button type="button" id="clearButton">CLEAR!</button>
+        
+    </form>
     
 <!--######## JAVASCRIPTS ########-->
     <script src="js/script.js"></script>

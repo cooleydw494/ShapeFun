@@ -1,70 +1,48 @@
-//get the canvas and drawing context
+//SET UP THE CANVAS
 var canvas = document.getElementById("canvasFun");
 var ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth; //fit to window
+canvas.height = window.innerHeight; //fit to window
 
-//set canvas to window size
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-//add mouse object
+//ALWAYS KEEP TRACK OF MOUSE POSITION
 var mouse = {
     "x": undefined,
     "y": undefined
 };
-//mousemove event to keep track of mouse pos.
 window.addEventListener("mousemove", function(event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    console.log(mouse);
 }, false);
 
-//declare circleArray and create click listener to make circles    
-var shapeStack = [];
-window.addEventListener("click", makeNewCircle, false);
+//GRAB HTML GUI ELEMENTS
+var submitButton = document.getElementById("submitButton");
+var clearButton = document.getElementById("clearButton");
+var shapeTypeField = document.getElementById("shapeType");
+var shapeNumberField = document.getElementById("shapeNumber");
+var colorPaletteField = document.getElementById("colorPalette");
 
-//set radius and side mins/ranges, collisionRadius, and velocity/expansion multipliers
-var radiusMin = 2;
-var radiusRange = 2;
-var squareSideMin = 3;
-var squareSideRange = 3;
-var collisionRadius = 60;
-var velMultiplier = 2;
-var expandMultiplier = 8;
+//DECLARE ALL CONTROL/GLOBAL VARIABLES
+var radiusMin = 2; //minimum radius of a circle
+var radiusRange = 2; //added range to the minimum radius of a circle
+var squareSideMin = 3; //minimum side length for a square
+var squareSideRange = 3; //added range to minimum side length of a square
+var collisionRadius = 60; //mouse collision radius for any shape of any size
+var velMultiplier = 2; //factor by which to multiply rand velocity of -.5 to .5
+var expandMultiplier = 8; //factor by which to multiply expandability of shapes past their base sizes
+var shapeStack = []; //array to hold all shapes to be animated/updated/drawn
 
-//instantiate color palettes
+//INSTANTIATE COLOR PALETTES AS ARRAYS
 var darkBluesPalette = ["#779589", "#151d4e", "#125b54", "#0a2427", "#161327"];
 var salmonPalette = ["#7b1f1f", "#995252", "#135d3b", "#c05b5b", "#444040"];
 var usaPalette = ["#cc092f", "#919693", "#ded5b3", "#1a4663", "#003050"];
 var oldSchoolPalette = ["#8C8619", "#BDB262", "BD8F24", "#A62E16", "#300906", "#8C8619", "#BDB262", "#BD8F24"];
 
-//prompt user for shapeType, shapeNumber, and colorPalette
-var shapeType = prompt("Choose a shape type, 'circle' or 'square'", "circle");
-var shapeNumber = prompt("How many shapes do you want to make?", 500);
-var colorPalettePrompt = prompt("Choose a color palette, either 'salmon', 'dark blues', 'usa', or 'old school'", "dark blues");
-switch (colorPalettePrompt) {
-    case "salmon":
-        colorPalette = salmonPalette;
-        break;
-    case "dark blues":
-        colorPalette = darkBluesPalette;
-        break;
-    case "usa":
-        colorPalette = usaPalette;
-        break;
-    case "old school":
-        colorPalette = oldSchoolPalette;
-        break;
-    default:
-        colorPalette = usaPalette;
-        break;
-}
-
-//start animation
+//START ANIMATION
 animate();
 
-//add shapes
-addShapes();
-
+//EVENT LISTENER FOR FORM SUBMIT / ADD SHAPES
+submitButton.addEventListener("click", addShapes, false);
+clearButton.addEventListener("click", clearShapes, false);
 
 //FUNCTIONS##########################
 
@@ -80,6 +58,9 @@ function animate() {
 
 //add shapes function
 function addShapes() {
+    var shapeType = shapeTypeField.value;
+    var shapeNumber = shapeNumberField.value;
+    var colorPalette = parseColorPalette(colorPaletteField.value);
     var shapeFunc;
     //pick the correct shape function
     switch(shapeType) {
@@ -94,6 +75,11 @@ function addShapes() {
     for (i = 0; i < shapeNumber; i++) {
         shapeFunc(colorPalette);
     }
+}
+
+//clear shapes from canvas
+function clearShapes() {
+    shapeStack = [];
 }
 
 //circle "class" constructor
@@ -210,6 +196,22 @@ function makeNewSquare(colorPalette) {
     var dy = (Math.random() - 0.5) * velMultiplier;
     var color = randColor(colorPalette), fillColor = randColor(colorPalette);
     shapeStack.push(new Square(x, y, dx, dy, side, color, fillColor));
+}
+
+//PARSE COLOR PALETTE STRING TO GET CORRECT ARRAY
+function parseColorPalette(colorPaletteString) {
+    switch (colorPaletteString) {
+    case "Salmon":
+        return salmonPalette;
+    case "Dark Blues":
+        return darkBluesPalette;
+    case "USA Cola":
+        return usaPalette;
+    case "Old School":
+        return oldSchoolPalette;
+    default:
+        return usaPalette;
+    }
 }
 
 //generate and return random color
