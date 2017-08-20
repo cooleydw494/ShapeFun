@@ -12,32 +12,54 @@
     
     <!-- GUI -->
     <form id="guiForm">
-       
-        <!--SHAPE TYPE-->
-        <label for="shapeType">Shape: </label>
-        <select id="shapeType">
-            <option value="circle">Circles</option>
-            <option value="square" selected="selected">Squares</option>
-        </select>
-        
-        <!--NUMBER OF SHAPES-->
-        <label for="shapeNumber"># of Shapes: </label>
-        <input type="text" id="shapeNumber" value="500" required="required" />
-        
-        <!--COLOR PALETTE-->
-        <label for="colorPalette">Color Palette: </label>
-        <select id="colorPalette">
-            <option value="Salmon">Salmon</option>
-            <option value="Dark Blues" selected="selected">Dark Blues</option>
-            <option value="USA Cola">USA Cola</option>
-            <option value="Old School">Old School</option>
-        </select>
-        
-        <!--SUBMIT-->
-        <button type="button" id="submitButton">MAKE DEM SHAPES!</button>
-        
-        <!--CLEAR-->
-        <button type="button" id="clearButton">CLEAR!</button>
+       <div class="flexrow">
+           
+           <div class="flexcolumn">
+                <!--SHAPE TYPE-->
+                <label for="shapeType">Shape: </label>
+                <select id="shapeType">
+                    <option value="circle">Circles</option>
+                    <option value="square" selected="selected">Squares</option>
+                </select>
+            </div><!--END flexcolumn-->
+            
+            <div class="flexcolumn">
+                <!--NUMBER OF SHAPES-->
+                <label for="shapeNumber"># of Shapes: </label>
+                <input type="text" id="shapeNumber" value="500" required="required" />
+            </div><!--END flexcolumn-->
+            
+            <div class="flexcolumn">
+                <!--COLOR PALETTE-->
+                <label for="colorPalette">Color Palette: </label>
+                <select id="colorPalette">
+                    <option value="Salmon">Salmon</option>
+                    <option value="Dark Blues" selected="selected">Dark Blues</option>
+                    <option value="USA Cola">USA Cola</option>
+                    <option value="Old School">Old School</option>
+                </select>
+            </div><!--END flexcolumn-->
+        </div> <!--END flexrow-->
+           
+        <div class="flexrow">
+            <!--SUBMIT-->
+            <button type="button" id="submitButton">MAKE DEM SHAPES!</button>
+
+            <!--CLEAR-->
+            <button type="button" id="clearButton">CLEAR!</button>
+            
+            <!--BACKGROUND COLOR-->
+            <div class="flexcolumn">
+                <label for="backgroundColor">Background Color: </label>
+                <select id="backgroundColor">
+                    <option value="black" selected="selected">Black</option>
+                    <option value="white">White</option>
+                    <option value="lightblue">Light Blue</option>
+                    <option value="#F8ECC2">Old Paper</option>
+                    <option value="#5E875A">Cactus</option>
+                </select>
+            </div><!--END flexcolumn-->
+        </div><!--END flexrow-->
         
     </form>
     

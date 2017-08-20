@@ -12,6 +12,7 @@ var mouse = {
 window.addEventListener("mousemove", function(event) {
     mouse.x = event.x;
     mouse.y = event.y;
+    console.log(mouse);
 }, false);
 
 //GRAB HTML GUI ELEMENTS
@@ -20,6 +21,7 @@ var clearButton = document.getElementById("clearButton");
 var shapeTypeField = document.getElementById("shapeType");
 var shapeNumberField = document.getElementById("shapeNumber");
 var colorPaletteField = document.getElementById("colorPalette");
+var backgroundColorField = document.getElementById("backgroundColor");
 
 //DECLARE ALL CONTROL/GLOBAL VARIABLES
 var radiusMin = 2; //minimum radius of a circle
@@ -40,9 +42,10 @@ var oldSchoolPalette = ["#8C8619", "#BDB262", "BD8F24", "#A62E16", "#300906", "#
 //START ANIMATION
 animate();
 
-//EVENT LISTENER FOR FORM SUBMIT / ADD SHAPES
+//EVENT LISTENER FOR addShapes, clearShapes, and backgroundColor
 submitButton.addEventListener("click", addShapes, false);
 clearButton.addEventListener("click", clearShapes, false);
+backgroundColorField.addEventListener("change", setBackground, false);
 
 //FUNCTIONS##########################
 
@@ -97,7 +100,7 @@ function Circle(x, y, dx, dy, r, color, fillColor) {
         ctx.arc(x, y, r, 0, Math.PI * 2, false);
         ctx.fillStyle = fillColor;
         ctx.fill();
-        ctx.stroke();
+//        ctx.stroke();
     };
     //update circle method
     this.update = function () {
@@ -129,7 +132,7 @@ function Circle(x, y, dx, dy, r, color, fillColor) {
 }
 
 //square class "constructor" message
-function Square(x, y, dx, dy, side, color, fillColor) {
+function Square(x, y, dx, dy, side, fillColor) {
     this.x = x;
     this.y = y;
     this.dx = dx;
@@ -139,9 +142,7 @@ function Square(x, y, dx, dy, side, color, fillColor) {
     //square draw function
     this.draw = function() {
         ctx.fillStyle = fillColor;
-        ctx.strokeStyle = color;
         ctx.fillRect(x, y, side, side);
-        ctx.stroke();
     };
     //update square method
     this.update = function() {
@@ -194,8 +195,8 @@ function makeNewSquare(colorPalette) {
     var dx = (Math.random() - 0.5) * velMultiplier;
     var y = Math.random() * (canvas.width - side);
     var dy = (Math.random() - 0.5) * velMultiplier;
-    var color = randColor(colorPalette), fillColor = randColor(colorPalette);
-    shapeStack.push(new Square(x, y, dx, dy, side, color, fillColor));
+    var fillColor = randColor(colorPalette);
+    shapeStack.push(new Square(x, y, dx, dy, side, fillColor));
 }
 
 //PARSE COLOR PALETTE STRING TO GET CORRECT ARRAY
@@ -219,4 +220,10 @@ function randColor(colorPalette) {
     //random index from 0 to last array index
     var index = (Math.floor(Math.random() * colorPalette.length));
     return colorPalette[index];
+}
+
+//change background color
+function setBackground() {
+    var color = backgroundColorField.value;
+    canvas.style.backgroundColor = color;
 }
