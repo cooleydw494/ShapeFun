@@ -12,7 +12,6 @@ var mouse = {
 window.addEventListener("mousemove", function(event) {
     mouse.x = event.x;
     mouse.y = event.y;
-    console.log(mouse);
 }, false);
 
 //GRAB HTML GUI ELEMENTS
@@ -42,10 +41,11 @@ var oldSchoolPalette = ["#8C8619", "#BDB262", "BD8F24", "#A62E16", "#300906", "#
 //START ANIMATION
 animate();
 
-//EVENT LISTENER FOR addShapes, clearShapes, and backgroundColor
+//EVENT LISTENER FOR addShapes, clearShapes, backgroundColor, and resize
 submitButton.addEventListener("click", addShapes, false);
 clearButton.addEventListener("click", clearShapes, false);
 backgroundColorField.addEventListener("change", setBackground, false);
+window.addEventListener("resize", resizeCanvas, false);
 
 //FUNCTIONS##########################
 
@@ -226,4 +226,10 @@ function randColor(colorPalette) {
 function setBackground() {
     var color = backgroundColorField.value;
     canvas.style.backgroundColor = color;
+}
+
+//check if shapes are off screen on resize and move them on screen
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
