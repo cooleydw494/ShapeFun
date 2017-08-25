@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    position: absolute;
+    position: relative;
 }
 #canvasFun {
     border: 1px solid black;
@@ -9,11 +9,10 @@ body {
 #guiForm {
     background-color: rgba(169, 215, 255, 0.61);
     color: darkblue;
-    position: relative;
-    bottom: 40vh;
-    width: 50%;
-    margin: 0 auto;
-    margin-top: -200px;
+    position: absolute;
+    top: 1%;
+    left: 30%;
+    width: 40%;
     border-radius: 10px 5px;
 }
 #guiForm .flexrow {
@@ -21,24 +20,34 @@ body {
     line-height: 30px;
     display: flex;
     justify-content: space-around;
-    padding: 15px;
+    padding: 5px;
 }
 #guiForm .flexcolumn {
     display: inline-flex;
     align-items: center;
+}
+#guiForm label {
+    width: 90px;
 }
 
 button,
 select,
 input {
     width: 100px;
+    height: 30px;
+    text-align: center;
+}
+input,
+select {
+    font-size: .9em;
 }
 
 
 /*MEDIA QUERIES*/
 @media screen and (max-width: 1200px) {
     #guiForm {
-        width: 75%;
+        width: 50%;
+        left: 25%;
     }
     button,
     select,
@@ -49,10 +58,6 @@ input {
 @media screen and (max-width: 800px) {
     #guiForm {
         width: 100%;
-    }
-    button,
-    select,
-    input {
-        width: 80px;
+        left: 0;
     }
 }

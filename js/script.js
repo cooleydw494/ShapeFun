@@ -21,6 +21,8 @@ var shapeTypeField = document.getElementById("shapeType");
 var shapeNumberField = document.getElementById("shapeNumber");
 var colorPaletteField = document.getElementById("colorPalette");
 var backgroundColorField = document.getElementById("backgroundColor");
+var velocityRange = document.getElementById("velocityRange");
+var expandRange = document.getElementById("expandRange");
 
 //DECLARE ALL CONTROL/GLOBAL VARIABLES
 var radiusMin = 2; //minimum radius of a circle
@@ -46,6 +48,13 @@ submitButton.addEventListener("click", addShapes, false);
 clearButton.addEventListener("click", clearShapes, false);
 backgroundColorField.addEventListener("change", setBackground, false);
 window.addEventListener("resize", resizeCanvas, false);
+//EVENT LISTENER FOR VELOCITY AND EXPAND SLIDERS
+velocityRange.addEventListener("input", function() {
+    velMultiplier = velocityRange.value;
+}, false);
+expandRange.addEventListener("input", function() {
+    expandMultiplier = expandRange.value;
+}, false);
 
 //FUNCTIONS##########################
 
