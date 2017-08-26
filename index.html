@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
-    <title>Canvas Fun ;)</title>
+    <title>Shape Fun!</title>
 </head>
 <body>
     <!-- CANVAS -->
@@ -23,19 +24,19 @@
                 </select>
             </div><!--END flexcolumn-->
             
-            <label for="shapeNumber"># of Shapes: </label>
+            <label for="shapeNumber">Number: </label>
             <div class="flexcolumn">
                 <!--NUMBER OF SHAPES-->
-                <input type="text" id="shapeNumber" value="500" required="required" />
+                <input type="text" id="shapeNumber" value="100" required="required" />
             </div><!--END flexcolumn-->
         </div> <!--END flexrow-->
            
         <div class="flexrow">
-            <label for="colorPalette">Color Palette: </label>
+            <label for="colorPalette">Colors: </label>
             <div class="flexcolumn">
                 <!--COLOR PALETTE-->
                 <select id="colorPalette">
-                    <option value="Salmon">Salmon</option>
+                    <option value="Cool">Cool</option>
                     <option value="Dark Blues" selected="selected">Dark Blues</option>
                     <option value="USA Cola">USA Cola</option>
                     <option value="Old School">Old School</option>
@@ -49,7 +50,7 @@
                     <option value="black" selected="selected">Black</option>
                     <option value="white">White</option>
                     <option value="lightblue">Light Blue</option>
-                    <option value="#F8ECC2">Old Paper</option>
+                    <option value="#BFB584">Old Paper</option>
                     <option value="#5E875A">Cactus</option>
                 </select>
             </div><!--END flexcolumn-->
@@ -63,15 +64,15 @@
             </div>
             
             <div class="flexcolumn">
-                <label for="expandRange">Expansion: </label>
-                <input id="expandRange" type="range" min="5" max="40" step=".25" value="8" />
+                <label for="sizeRange">Size: </label>
+                <input id="sizeRange" type="range" min=".5" max="7" step=".25" value="1" />
             </div>
         
         </div> <!--END flexrow-->
            
         <div class="flexrow">
             <!--SUBMIT-->
-            <button type="button" id="submitButton">MAKE DEM SHAPES!</button>
+            <button type="button" id="submitButton">ADD SHAPES!</button>
 
             <!--CLEAR-->
             <button type="button" id="clearButton">CLEAR!</button>

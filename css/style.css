@@ -1,6 +1,9 @@
 body {
     margin: 0;
     position: relative;
+    font-family: 'Baloo Bhaijaan';
+    font-style: italic;
+    font-weight: 0;
 }
 #canvasFun {
     border: 1px solid black;
@@ -13,7 +16,8 @@ body {
     top: 1%;
     left: 30%;
     width: 40%;
-    border-radius: 10px 5px;
+    border-radius: 5px;
+    border: 2px solid white;
 }
 #guiForm .flexrow {
     height: 30px;
@@ -28,6 +32,11 @@ body {
 }
 #guiForm label {
     width: 90px;
+}
+input[type=text] {
+    border-radius: 7%;
+    width: 95px;
+    height: 25px;
 }
 
 button,

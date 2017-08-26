@@ -22,9 +22,10 @@ var shapeNumberField = document.getElementById("shapeNumber");
 var colorPaletteField = document.getElementById("colorPalette");
 var backgroundColorField = document.getElementById("backgroundColor");
 var velocityRange = document.getElementById("velocityRange");
-var expandRange = document.getElementById("expandRange");
+var sizeRange = document.getElementById("sizeRange");
 
 //DECLARE ALL CONTROL/GLOBAL VARIABLES
+var sizeMultiplier = 1;
 var radiusMin = 2; //minimum radius of a circle
 var radiusRange = 2; //added range to the minimum radius of a circle
 var squareSideMin = 3; //minimum side length for a square
@@ -36,9 +37,9 @@ var shapeStack = []; //array to hold all shapes to be animated/updated/drawn
 
 //INSTANTIATE COLOR PALETTES AS ARRAYS
 var darkBluesPalette = ["#779589", "#151d4e", "#125b54", "#0a2427", "#161327"];
-var salmonPalette = ["#7b1f1f", "#995252", "#135d3b", "#c05b5b", "#444040"];
+var coolPalette = ["#110478", "#69FFC7", "#8C00FF", "#3B2DB7", "#A3FCBA"];
 var usaPalette = ["#cc092f", "#919693", "#ded5b3", "#1a4663", "#003050"];
-var oldSchoolPalette = ["#8C8619", "#BDB262", "BD8F24", "#A62E16", "#300906", "#8C8619", "#BDB262", "#BD8F24"];
+var oldSchoolPalette = ["#8FBA06", "#719506", "#4E7300", "#232027", "#1D1A21"];
 
 //START ANIMATION
 animate();
@@ -52,8 +53,12 @@ window.addEventListener("resize", resizeCanvas, false);
 velocityRange.addEventListener("input", function() {
     velMultiplier = velocityRange.value;
 }, false);
-expandRange.addEventListener("input", function() {
-    expandMultiplier = expandRange.value;
+sizeRange.addEventListener("input", function() {
+    sizeMultiplier = sizeRange.value;
+    radiusMin = 2 * sizeMultiplier;
+    radiusRange = 2 * sizeMultiplier;
+    squareSideMin = 3 * sizeMultiplier;
+    squareSideRange = 3 * sizeMultiplier;
 }, false);
 
 //FUNCTIONS##########################
@@ -87,6 +92,7 @@ function addShapes() {
     for (i = 0; i < shapeNumber; i++) {
         shapeFunc(colorPalette);
     }
+    shuffle(shapeStack);
 }
 
 //clear shapes from canvas
@@ -140,7 +146,7 @@ function Circle(x, y, dx, dy, r, color, fillColor) {
     };
 }
 
-//square class "constructor" message
+//square class "constructor"
 function Square(x, y, dx, dy, side, fillColor) {
     this.x = x;
     this.y = y;
@@ -211,8 +217,8 @@ function makeNewSquare(colorPalette) {
 //PARSE COLOR PALETTE STRING TO GET CORRECT ARRAY
 function parseColorPalette(colorPaletteString) {
     switch (colorPaletteString) {
-    case "Salmon":
-        return salmonPalette;
+    case "Cool":
+        return coolPalette;
     case "Dark Blues":
         return darkBluesPalette;
     case "USA Cola":
@@ -234,11 +240,21 @@ function randColor(colorPalette) {
 //change background color
 function setBackground() {
     var color = backgroundColorField.value;
-    canvas.style.backgroundColor = color;
+    canvas.style.background = color;
 }
 
 //check if shapes are off screen on resize and move them on screen
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+}
+
+function shuffle(array) {
+    var m = array.length, t, i;
+    while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
 }
